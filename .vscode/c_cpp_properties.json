@@ -3,14 +3,13 @@
         {
             "name": "Mac",
             "includePath": [
-                "/Users/stevenzhou/",
-                "/Users/stevenzhou/c-dictionary/libcdict/builddir"
+                "/Users/stevenzhou/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "macos-gcc-arm64"
+            "intelliSenseMode": "macos-gcc-arm"
         },
         {
             "name": "mac",
