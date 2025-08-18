@@ -80,25 +80,28 @@ static PyObject* _run_server(PyObject* self, PyObject* args)
 static PyObject* _send_response(PyObject* self, PyObject* args)
 {
     int cli_sock;
-    char* response_message = malloc(2048);
-    response_message = "stirn stirng";
+    const char* res;
 
-    if (!PyArg_ParseTuple(args, "i", &cli_sock))
+    if (!PyArg_ParseTuple(args, "is", &cli_sock, &res))
     {
         return NULL;
     }
 
     // send reponse to client
-    int r = write(cli_sock, response_message, sizeof(response_message));
+    int r = write(cli_sock, res, 2048);
     if (r < 0)
     {
-        // PyErr_SetString(PyExc_BaseExeception, "Error in socket accepting"); // find better error code later 
+        PyErr_SetString(PyExc_ConnectionError, "Error in writing to socket"); // find better error code later 
         return NULL; 
     }
 
-    // close(cli_sock);
+    if (close(cli_sock) < 0)
+    {
+        PyErr_SetString(PyExc_SystemError, "Error deallocating socket"); // find better error code later 
+        return NULL; 
+    }
 
-    return 0;
+    return PyUnicode_FromString("success");
 }
 
 static struct PyMethodDef methods[] = {
