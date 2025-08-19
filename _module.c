@@ -70,8 +70,7 @@ static PyObject* _run_server(PyObject* self, PyObject* args)
             return NULL; 
         }
    
-        // return PyUnicode_FromString(buffer);  
-        return PyLong_FromLong(newsockfd);
+        return Py_BuildValue("is", newsockfd, buffer);
 
         // return struct client_token: metadata, data transmitted, way to callbakc (function pointer, by calling, calls another func to send msg)
     }
@@ -95,19 +94,40 @@ static PyObject* _send_response(PyObject* self, PyObject* args)
         return NULL; 
     }
 
-    if (close(cli_sock) < 0)
+    // if (close(cli_sock) < 0)
+    // {
+    //     PyErr_SetString(PyExc_SystemError, "Error deallocating socket"); // find better error code later 
+    //     return NULL; 
+    // }
+
+    // returns 0 on success
+    return PyLong_FromLong(0);
+}
+
+static PyObject* _close_server(PyObject* self, PyObject* args)
+{
+    int cli_sock;
+
+    if(!PyArg_ParseTuple(args, "i", &cli_sock))
+    {
+        return NULL;
+    }
+
+     if (close(cli_sock) < 0)
     {
         PyErr_SetString(PyExc_SystemError, "Error deallocating socket"); // find better error code later 
         return NULL; 
     }
 
-    return PyUnicode_FromString("success");
+    return PyLong_FromLong(0);
 }
+
 
 static struct PyMethodDef methods[] = {
     {"server_config", (PyCFunction)_server_config, METH_VARARGS},
     {"run_server", (PyCFunction)_run_server, METH_VARARGS},
     {"send_response", (PyCFunction)_send_response, METH_VARARGS},
+    {"close_server", (PyCFunction)_close_server, METH_VARARGS},
     {NULL, NULL}
 };
 
