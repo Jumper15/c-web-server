@@ -14,8 +14,7 @@ static PyObject* _run_server(PyObject* self, PyObject* args)
 
     if (listen(sockfd, 1) < 0) 
     {
-        PyErr_SetString(PyExc_ConnectionError, "Error in socket listening"); // find better error code later
-        return NULL; 
+        return PyErr_SetFromErrno(PyExc_OSError);
     } 
 
     while(1)
@@ -23,18 +22,15 @@ static PyObject* _run_server(PyObject* self, PyObject* args)
         newsockfd = accept(sockfd, (struct sockaddr*) &cli_addr, &clilen);
         if (newsockfd < 0)
         {
-            PyErr_SetString(PyExc_ConnectionError, "Error in socket accepting"); // find better error code later 
-            return NULL; 
+            return PyErr_SetFromErrno(PyExc_OSError);
+            
         }
 
         if (read(newsockfd, buffer, sizeof(buffer)) < 0) 
         {
-            PyErr_SetString(PyExc_ConnectionError, "Error in socket accepting"); // find better error code later 
-            return NULL; 
+            return PyErr_SetFromErrno(PyExc_OSError);
         }
    
         return Py_BuildValue("is", newsockfd, buffer);
-
-        // return struct client_token: metadata, data transmitted, way to callbakc (function pointer, by calling, calls another func to send msg)
     }
 }

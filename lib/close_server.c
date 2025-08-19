@@ -11,8 +11,7 @@ static PyObject* _close_server(PyObject* self, PyObject* args)
 
      if (close(cli_sock) < 0)
     {
-        PyErr_SetString(PyExc_SystemError, "Error deallocating socket"); // find better error code later 
-        return NULL; 
+        return PyErr_SetFromErrno(PyExc_OSError);
     }
 
     return PyLong_FromLong(0);
