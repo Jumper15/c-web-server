@@ -1,6 +1,6 @@
 #include "_module.h"
 
-static PyObject* _run_server(PyObject* self, PyObject* args) 
+static PyObject* _run_server_tcp(PyObject* self, PyObject* args) 
 {
     int sockfd, newsockfd;
     struct sockaddr_in cli_addr;
@@ -12,25 +12,23 @@ static PyObject* _run_server(PyObject* self, PyObject* args)
         return NULL;
     }
 
-    if (listen(sockfd, 1) < 0) 
+    if (listen(sockfd, 1) == ERR_VAL) 
     {
         return PyErr_SetFromErrno(PyExc_OSError);
     } 
 
-    while(1)
-    {
         newsockfd = accept(sockfd, (struct sockaddr*) &cli_addr, &clilen);
-        if (newsockfd < 0)
+        if (newsockfd == ERR_VAL)
         {
-            return PyErr_SetFromErrno(PyExc_OSError);
-            
+            return PyErr_SetFromErrno(PyExc_OSError); 
         }
 
-        if (read(newsockfd, buffer, sizeof(buffer)) < 0) 
+        // pthread handling?
+
+        if (read(newsockfd, buffer, sizeof(buffer)) == ERR_VAL) 
         {
             return PyErr_SetFromErrno(PyExc_OSError);
         }
    
         return Py_BuildValue("is", newsockfd, buffer);
-    }
 }

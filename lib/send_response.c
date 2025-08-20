@@ -12,7 +12,7 @@ static PyObject* _send_response(PyObject* self, PyObject* args)
 
     // send reponse to client
     int r = write(cli_sock, res, 2048);
-    if (r < 0)
+    if (r == ERR_VAL)
     {   
         return PyErr_SetFromErrno(PyExc_OSError);
     }

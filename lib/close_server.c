@@ -9,7 +9,7 @@ static PyObject* _close_server(PyObject* self, PyObject* args)
         return NULL;
     }
 
-     if (close(cli_sock) < 0)
+     if (close(cli_sock) == ERR_VAL)
     {
         return PyErr_SetFromErrno(PyExc_OSError);
     }

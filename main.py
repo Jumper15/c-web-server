@@ -2,6 +2,6 @@ import _module
 
 print("hello")
 sockfd = _module.server_config(3001)
-[newsockfd, message] = _module.run_server(sockfd)
+[newsockfd, message] = _module.run_server_tcp(sockfd)
 response = _module.send_response(newsockfd, "MESAGE")
 print(sockfd, newsockfd, message, response)

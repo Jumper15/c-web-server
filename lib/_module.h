@@ -6,3 +6,5 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <strings.h>
+
+#define ERR_VAL -1
