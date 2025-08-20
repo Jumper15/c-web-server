@@ -5,6 +5,7 @@
 // server_config(int port, str socket_type)
 static PyObject* _server_config(PyObject* self, PyObject* args)
 {
+    char* sock_in; 
     int sock_type = SOCK_STREAM;
     // // AF_INET or ipv4 is exclusively used rn
     // int addr_type = AF_INET;
@@ -13,9 +14,18 @@ static PyObject* _server_config(PyObject* self, PyObject* args)
     int port, sockfd;
     struct sockaddr_in server_addr;
 
-    if (!PyArg_ParseTuple(args, "i|i", &port, &sock_type)) 
+    if (!PyArg_ParseTuple(args, "i|s", &port, &sock_in)) 
     {
         return NULL;
+    }
+
+    if (sock_in == "SOCK_STREAM")
+    {
+        sock_type = SOCK_STREAM;
+    }
+    if (sock_in == "SOCK_DGRAM")
+    {
+        sock_type = SOCK_DGRAM;
     }
 
     server_addr.sin_family = AF_INET;
@@ -32,7 +42,7 @@ static PyObject* _server_config(PyObject* self, PyObject* args)
     }
     else if (sock_type == SOCK_DGRAM)
     {
-        sockfd = udp_create();
+        sockfd = udp_create(server_addr);
         if (sockfd == -1) {
         return PyErr_SetFromErrno(PyExc_OSError);
         }

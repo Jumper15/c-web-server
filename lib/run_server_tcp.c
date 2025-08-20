@@ -17,18 +17,18 @@ static PyObject* _run_server_tcp(PyObject* self, PyObject* args)
         return PyErr_SetFromErrno(PyExc_OSError);
     } 
 
-        newsockfd = accept(sockfd, (struct sockaddr*) &cli_addr, &clilen);
-        if (newsockfd == ERR_VAL)
-        {
-            return PyErr_SetFromErrno(PyExc_OSError); 
-        }
+    newsockfd = accept(sockfd, (struct sockaddr*) &cli_addr, &clilen);
+    if (newsockfd == ERR_VAL)
+    {
+        return PyErr_SetFromErrno(PyExc_OSError); 
+    }
 
-        // pthread handling?
+    // pthread handling?
 
-        if (read(newsockfd, buffer, sizeof(buffer)) == ERR_VAL) 
-        {
-            return PyErr_SetFromErrno(PyExc_OSError);
-        }
-   
-        return Py_BuildValue("is", newsockfd, buffer);
+    if (read(newsockfd, buffer, sizeof(buffer)) == ERR_VAL) 
+    {
+        return PyErr_SetFromErrno(PyExc_OSError);
+    }
+
+    return Py_BuildValue("is", newsockfd, buffer);
 }
