@@ -6,5 +6,6 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <strings.h>
+#include <assert.h>
 
 #define ERR_VAL -1
