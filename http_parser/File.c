@@ -8,7 +8,7 @@ char* readFile(char* fileName)
     fp = fopen(fileName, "r");
     if (fp == NULL)
     {
-        perror("Error when openig file");
+        perror("Error when opening file");
         exit(1);
     }
 
