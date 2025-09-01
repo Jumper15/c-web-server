@@ -1,7 +1,6 @@
 #ifndef _MODULE_H
 #define _MODULE_H
 
-// #include <Python.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -15,6 +14,8 @@
 #include "data_structs/linkedlist/linkedlist.c"
 
 #define ERR_VAL -1
+
+// extern struct LinkedList* res_dict;
 
 struct http_request_options {
      char* route;

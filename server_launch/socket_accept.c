@@ -13,8 +13,8 @@ char* socket_accept(int sockfd, struct LinkedList* res_dict)
     {
       return NULL;
     } 
-    while (1)
-    {
+    // while (1)
+    // {
           newsockfd = accept(sockfd, (struct sockaddr*) &cli_addr, &clilen);
           if (newsockfd == ERR_VAL)
           {
@@ -36,5 +36,5 @@ char* socket_accept(int sockfd, struct LinkedList* res_dict)
           return res;
 
 
-    }
+    // }
 }

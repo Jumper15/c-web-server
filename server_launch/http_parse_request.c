@@ -33,8 +33,8 @@ struct http_request_line* http_parse_request(char* req_string)
 
     char* header_line = strtok(req_string, "\n");
     // char* header_line = strtok(parse_string, "\n");
-    char* header_fields = strtok(NULL, "|"); 
-    char* content_body = strtok(NULL, "|");
+    // char* header_fields = strtok(NULL, "|"); 
+    // char* content_body = strtok(NULL, "|");
 
     struct http_request_line* req = http_request_line_constructor(header_line);
     
