@@ -4,5 +4,6 @@
           "__tree": "cpp",
           "forward_list": "cpp",
           "list": "cpp"
-     }
+     },
+     "editor.fontSize": 14
 }

@@ -6,6 +6,7 @@
 
 char* build_http_response(char* method)
 {
+    
     char* date_header_content = get_date();
 
     if (strcmp(method, "GET") == 0)

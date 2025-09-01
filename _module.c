@@ -1,17 +1,14 @@
-#include "lib/_module.h"
-#include "lib/server_config.c"
-#include "lib/run_server_tcp.c"
-#include "lib/run_server_udp.c"
-#include "lib/send_response.c"
-#include "lib/close_server.c"
+#include "_module.h"
+#include "server_config.c"
+#include "server_launch.c"
+// #include "lib/run_server_tcp.c"
+// #include "lib/run_server_udp.c"
+// #include "lib/send_response.c"
+// #include "lib/close_server.c"
 
 static struct PyMethodDef methods[] = {
     {"server_config", (PyCFunction)_server_config, METH_VARARGS},
-    {"run_server_tcp", (PyCFunction)_run_server_tcp, METH_VARARGS},
-    {"run_server_udp", (PyCFunction)_run_server_udp, METH_VARARGS},
-    {"send_response_text", (PyCFunction)_send_response_text, METH_VARARGS},
-    {"send_from_file", (PyCFunction)_send_from_file, METH_VARARGS},
-    {"close_server", (PyCFunction)_close_server, METH_VARARGS},
+    {"server_launch", (PyCFunction)_server_launch, METH_VARARGS},
     {NULL, NULL}
 };
 

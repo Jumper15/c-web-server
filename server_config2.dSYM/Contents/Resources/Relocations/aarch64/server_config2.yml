@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/stevenzhou/python_c_api_lib/server_config2'
+relocations:     []
+...

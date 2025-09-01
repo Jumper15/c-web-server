@@ -1,12 +1,12 @@
 #include "linkedlist.h"
 
-int addNode(struct LinkedList* ll, struct Node* node, int ll_len)
+int addNode(struct LinkedList* ll, struct Node* node)
 {
      struct Node* cur;
      if (ll->head == NULL)
      {
           ll->head = node;
-          // ll_len++;
+          ll_len++;
           return 0;
      }
      cur = ll->head;
@@ -15,7 +15,7 @@ int addNode(struct LinkedList* ll, struct Node* node, int ll_len)
           cur = cur->next;
      }
      cur->next = node;
-     // ll_len++;
+     ll_len++;
      return 0;
 }
 
@@ -24,7 +24,7 @@ int addNodeFirst()
      return 0;
 }
 
-int removeNode(struct LinkedList* ll, int ll_len)
+int removeNode(struct LinkedList* ll)
 {
      struct Node* cur;
      struct Node* nxt;
@@ -39,7 +39,7 @@ int removeNode(struct LinkedList* ll, int ll_len)
      return 0;
 }
 
-int removeNodeByKey(struct LinkedList* ll, char* key, int ll_len)
+int removeNodeByKey(struct LinkedList* ll, char* key)
 {
      struct Node* cur;
      struct Node* nxt;
@@ -66,7 +66,7 @@ int removeNodeByKey(struct LinkedList* ll, char* key, int ll_len)
      return 0;
 }
 
-int removeNodeByValue(struct LinkedList* ll, char* value, int ll_len)
+int removeNodeByValue(struct LinkedList* ll, char* value)
 {
      struct Node* cur;
      struct Node* nxt;
